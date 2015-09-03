@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  CreateMemeViewController.swift
 //  mme1
 //
 //  Created by Marcus Ronélius on 2015-08-25.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class CreateMemeViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     // Outlets
     @IBOutlet weak var imagePickerView: UIImageView!
@@ -125,27 +125,33 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             (type: String!, ok: Bool, items: [AnyObject]!, err:NSError!) -> Void in
             
             if ok {
-                println("completed \(type) \(ok) \(items) \(err)")
-            
+                // Cast the activity type (gotten from activityViewControllers completehandler. We do this so that we can make use of NSStrings method "rangeOfString". This will allow us to determine if user saved the image to camera roll or shared it
                 var activityType = type as NSString
-                var activityTypeRange = activityType.rangeOfString("SaveToCameraRol")
+                var activityTypeRangeCameraRoll = activityType.rangeOfString("SaveToCameraRol")
                 
-                if (activityTypeRange.location != NSNotFound) {
-                    
+                // If activityType is camera roll
+                if (activityTypeRangeCameraRoll.location != NSNotFound) {
+                    // Activity type is camera roll
                     self.presentDismissableAlertViewControllerWithTitle("Successful!", message: "Your image was successfully saved", preferredStyle: UIAlertControllerStyle.Alert, dismissText: "OK")
                 } else {
+                    // Activity type is not camera roll
                     self.presentDismissableAlertViewControllerWithTitle("Successful!", message: "Your image was successfully shared", preferredStyle: UIAlertControllerStyle.Alert, dismissText: "OK")
                 }
             }
         }
+        // Everything is set up, now present the activityViewController
         presentViewController(activityViewController, animated: true, completion: nil)
     }
     
     func presentDismissableAlertViewControllerWithTitle(title: String, message: String, preferredStyle: UIAlertControllerStyle, dismissText: String) {
+        
+        // Set the UIAlertController with arguments provided in method arguments
         var alert = UIAlertController(title: title, message: message, preferredStyle: preferredStyle)
         
+        // Add dismissaction with text provided in method arguments
         alert.addAction(UIAlertAction(title: dismissText, style: UIAlertActionStyle.Default, handler: nil))
         
+        // Present it
         presentViewController(alert, animated: true, completion: nil)
     }
 }

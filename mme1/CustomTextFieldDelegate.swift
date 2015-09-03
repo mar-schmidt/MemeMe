@@ -53,6 +53,7 @@ class CustomTextFieldDelegate : NSObject, UITextFieldDelegate {
         textFieldRect.origin.x = 0 // For some reason, textFields y origin is -9. This will break CGRectContainsPoint function
         
         if let dict = notification.userInfo {
+            // Get the CGRect of the keyboardFrame provided by NSNotification object
             var keyboardFrame: CGRect = (dict[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
             
             keyboardFrame.origin.y -= 100 // There is a UIToolBar above keyboard. Take that into account.
@@ -78,7 +79,7 @@ class CustomTextFieldDelegate : NSObject, UITextFieldDelegate {
     }
     
     func keyboardWillShow(notification: NSNotification) {
-        // Change currentTextFields superview's view (view of ViewController) only if keyboard hids the currentTextFields frame
+        // Change currentTextFields superview's view (view of CreateMemeViewController) only if keyboard hids the currentTextFields frame
         if textFieldIsHiddenByKeyboard(notification) {
             // This will make the view go up together with the keyboard
             currentTextField.superview!.frame.origin.y -= getKeyboardHeight(notification)
@@ -86,10 +87,11 @@ class CustomTextFieldDelegate : NSObject, UITextFieldDelegate {
     }
     
     func keyboardWillHide(notification: NSNotification) {
+        // This method checks if viewcontrollers view is not in its original y position (which essentially means that it has been moved in methodkeyboardWillShow:. If its not, we can safetly move it back
+        
         var parentViewFrame = currentTextField.superview?.frame
         let windowOriginFrame = currentTextField.superview?.window?.frame
         
-        // This checks if viewcontrollers view is not in its original y position (which essentially means that it has been moved in methodkeyboardWillShow:. If its not, we can safetly move it back
         if !(parentViewFrame?.origin.y == windowOriginFrame?.origin.y) {
             currentTextField.superview!.frame.origin.y += getKeyboardHeight(notification)
         }

@@ -11,7 +11,7 @@
 		2C1D00581B91DFC2003700F0 /* Meme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1D00571B91DFC2003700F0 /* Meme.swift */; };
 		2C1D005A1B931625003700F0 /* DragableUITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1D00591B931625003700F0 /* DragableUITextField.swift */; };
 		2C7638B61B8D016600404EA3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7638B51B8D016600404EA3 /* AppDelegate.swift */; };
-		2C7638B81B8D016600404EA3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7638B71B8D016600404EA3 /* ViewController.swift */; };
+		2C7638B81B8D016600404EA3 /* CreateMemeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7638B71B8D016600404EA3 /* CreateMemeViewController.swift */; };
 		2C7638BB1B8D016600404EA3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C7638B91B8D016600404EA3 /* Main.storyboard */; };
 		2C7638BD1B8D016600404EA3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C7638BC1B8D016600404EA3 /* Images.xcassets */; };
 		2C7638C01B8D016600404EA3 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C7638BE1B8D016600404EA3 /* LaunchScreen.xib */; };
@@ -35,7 +35,7 @@
 		2C7638B01B8D016600404EA3 /* mme1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mme1.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C7638B41B8D016600404EA3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2C7638B51B8D016600404EA3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		2C7638B71B8D016600404EA3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		2C7638B71B8D016600404EA3 /* CreateMemeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateMemeViewController.swift; sourceTree = "<group>"; };
 		2C7638BA1B8D016600404EA3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2C7638BC1B8D016600404EA3 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		2C7638BF1B8D016600404EA3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -84,7 +84,7 @@
 			isa = PBXGroup;
 			children = (
 				2C7638B51B8D016600404EA3 /* AppDelegate.swift */,
-				2C7638B71B8D016600404EA3 /* ViewController.swift */,
+				2C7638B71B8D016600404EA3 /* CreateMemeViewController.swift */,
 				2C1D00551B8F9DB4003700F0 /* CustomTextFieldDelegate.swift */,
 				2C1D00571B91DFC2003700F0 /* Meme.swift */,
 				2C1D00591B931625003700F0 /* DragableUITextField.swift */,
@@ -221,7 +221,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C7638B81B8D016600404EA3 /* ViewController.swift in Sources */,
+				2C7638B81B8D016600404EA3 /* CreateMemeViewController.swift in Sources */,
 				2C1D00581B91DFC2003700F0 /* Meme.swift in Sources */,
 				2C1D00561B8F9DB4003700F0 /* CustomTextFieldDelegate.swift in Sources */,
 				2C1D005A1B931625003700F0 /* DragableUITextField.swift in Sources */,

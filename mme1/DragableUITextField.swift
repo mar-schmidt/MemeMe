@@ -22,11 +22,9 @@ class DragableUITextField: UITextField {
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         if let touch = touches.first as? UITouch {
             
-            // Removing constraints. Otherwise the element  will "pop" back when its becoming first responder. This is due to autolayout
-            if !self.hasAmbiguousLayout() {
-                self.removeConstraints(self.constraints())
-                self.setTranslatesAutoresizingMaskIntoConstraints(true)
-            }
+            // Removing constraints. Otherwise the element  will "pop" back when its becoming first responder. This is due to autolayout. This will throw some errors in the console but still works properly
+            self.removeConstraints(self.constraints())
+            self.setTranslatesAutoresizingMaskIntoConstraints(true)
         }
     }
     

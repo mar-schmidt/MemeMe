@@ -37,14 +37,18 @@ class Meme {
         UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
+        // Crop the image to the frame of the imageView, this will avoid getting other UIElements (like toolbars) in the final image
         memedImage = cropImage(memedImage, rect: meme.originalImageView.frame)
         
+        // Assign the cropped image to the memeImage property
         memeImage = memedImage
         
+        // Return it
         return memedImage
     }
     
     private func cropImage(image: UIImage, rect: CGRect) -> UIImage {
+        // This methid will crop the image to the CGRect of the provided image
         let imageRef = CGImageCreateWithImageInRect(image.CGImage, rect)
         
         return UIImage(CGImage: imageRef)!
