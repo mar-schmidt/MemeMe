@@ -11,14 +11,14 @@
 import Foundation
 import UIKit
 
-class Meme {
+struct Meme {
     let topText: String
     let bottomText: String
     let originalImage: UIImage
     let originalImageView: UIImageView
     let view: UIView
     
-    var memeImage: UIImage?
+     var memeImage: UIImage?
     
     init(topText: String, bottomText: String, image: UIImage, imageView: UIImageView, view: UIView) {
         self.topText = topText
@@ -26,9 +26,11 @@ class Meme {
         self.originalImage = image
         self.originalImageView = imageView
         self.view = view
+        
+        self.memeImage = createMemeImageFromObject(self)
     }
     
-    func createMemeImageFromObject(meme: Meme) -> UIImage {
+    mutating func createMemeImageFromObject(meme: Meme) -> UIImage {
         // Render view to an image
         UIGraphicsBeginImageContext(meme.view.frame.size)
         meme.view.drawViewHierarchyInRect(meme.view.frame,
@@ -41,7 +43,7 @@ class Meme {
         memedImage = cropImage(memedImage, rect: meme.originalImageView.frame)
         
         // Assign the cropped image to the memeImage property
-        memeImage = memedImage
+        self.memeImage = memedImage
         
         // Return it
         return memedImage

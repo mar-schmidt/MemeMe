@@ -114,33 +114,35 @@ class CreateMemeViewController: UIViewController, UIImagePickerControllerDelegat
             imageView: imagePickerView,
             view: self.view)
         
-        var memedImage = meme.createMemeImageFromObject(meme)
-        
-        // Create the activityViewController
-        let activityViewController = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
-        
-        
-        // https://github.com/mattneub/Programming-iOS-Book-Examples/blob/master/bk2ch13p635activityView/ch26p901activityView/ViewController.swift
-        activityViewController.completionWithItemsHandler = {
-            (type: String!, ok: Bool, items: [AnyObject]!, err:NSError!) -> Void in
+        if var memedImage = meme.memeImage as UIImage! {
+            // Create the activityViewController
+            let activityViewController = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
             
-            if ok {
-                // Cast the activity type (gotten from activityViewControllers completehandler. We do this so that we can make use of NSStrings method "rangeOfString". This will allow us to determine if user saved the image to camera roll or shared it
-                var activityType = type as NSString
-                var activityTypeRangeCameraRoll = activityType.rangeOfString("SaveToCameraRol")
+            // https://github.com/mattneub/Programming-iOS-Book-Examples/blob/master/bk2ch13p635activityView/ch26p901activityView/ViewController.swift
+            activityViewController.completionWithItemsHandler = {
+                (type: String!, ok: Bool, items: [AnyObject]!, err:NSError!) -> Void in
                 
-                // If activityType is camera roll
-                if (activityTypeRangeCameraRoll.location != NSNotFound) {
-                    // Activity type is camera roll
-                    self.presentDismissableAlertViewControllerWithTitle("Successful!", message: "Your image was successfully saved", preferredStyle: UIAlertControllerStyle.Alert, dismissText: "OK")
-                } else {
-                    // Activity type is not camera roll
-                    self.presentDismissableAlertViewControllerWithTitle("Successful!", message: "Your image was successfully shared", preferredStyle: UIAlertControllerStyle.Alert, dismissText: "OK")
+                if ok {
+                    // Cast the activity type (gotten from activityViewControllers completehandler. We do this so that we can make use of NSStrings method "rangeOfString". This will allow us to determine if user saved the image to camera roll or shared it
+                    var activityType = type as NSString
+                    var activityTypeRangeCameraRoll = activityType.rangeOfString("SaveToCameraRol")
+                    
+                    // If activityType is camera roll
+                    if (activityTypeRangeCameraRoll.location != NSNotFound) {
+                        // Activity type is camera roll
+                        self.presentDismissableAlertViewControllerWithTitle("Successful!", message: "Your image was successfully saved", preferredStyle: UIAlertControllerStyle.Alert, dismissText: "OK")
+                    } else {
+                        // Activity type is not camera roll
+                        self.presentDismissableAlertViewControllerWithTitle("Successful!", message: "Your image was successfully shared", preferredStyle: UIAlertControllerStyle.Alert, dismissText: "OK")
+                    }
                 }
             }
+            // Everything is set up, now present the activityViewController
+            presentViewController(activityViewController, animated: true, completion: nil)
+            
+        } else {
+            presentDismissableAlertViewControllerWithTitle("Issue", message: "Problem when creating the meme image. Please try again", preferredStyle: UIAlertControllerStyle.Alert, dismissText: "OK")
         }
-        // Everything is set up, now present the activityViewController
-        presentViewController(activityViewController, animated: true, completion: nil)
     }
     
     func presentDismissableAlertViewControllerWithTitle(title: String, message: String, preferredStyle: UIAlertControllerStyle, dismissText: String) {
@@ -154,6 +156,34 @@ class CreateMemeViewController: UIViewController, UIImagePickerControllerDelegat
         // Present it
         presentViewController(alert, animated: true, completion: nil)
     }
+    
+    
+    /*
+    func rotationDidChange(notification: NSNotification) {
+        // Does not matter which orientation action we're getting. We'll restore textfields original constraints
+        
+        
+        if topTextField.textFieldConstraints != nil{
+            for constraint in topTextField.textFieldConstraints as NSArray as! [NSLayoutConstraint] {
+                topTextField.addConstraint(constraint)
+            }
+        }
+    }
+    
+    func subscribeToNotifications() {
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "rotationDidChange:", name: UIDeviceOrientationDidChangeNotification, object: nil)
+    }
+    
+    func unsubscribeToNotifications() {
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIDeviceOrientationDidChangeNotification, object: nil)
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        unsubscribeToNotifications()
+    }
+*/
 }
 
 

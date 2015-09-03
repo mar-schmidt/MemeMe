@@ -17,7 +17,7 @@ class CustomTextFieldDelegate : NSObject, UITextFieldDelegate {
         super.init()
         
         // Subscribe to keyboard notifications
-        subscribeToKeyboardNotifications()
+        subscribeToNotifications()
     }
     
     func textFieldDidBeginEditing(textField: UITextField) {
@@ -105,18 +105,17 @@ class CustomTextFieldDelegate : NSObject, UITextFieldDelegate {
         return keyboardSize.CGRectValue().height
     }
     
-    func subscribeToKeyboardNotifications() {
+    func subscribeToNotifications() {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
-
     }
     
-    func unsubscribeToKeyboardNotifications() {
+    func unsubscribeToNotifications() {
         NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
     }
     
      deinit {
-        unsubscribeToKeyboardNotifications()
+        unsubscribeToNotifications()
     }
 }

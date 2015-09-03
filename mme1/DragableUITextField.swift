@@ -11,12 +11,22 @@ import UIKit
 
 class DragableUITextField: UITextField {
     
+    var textFieldConstraints: NSMutableArray!
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
 
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        
+        /*
+        var currentConstraints = self.constraints()
+        // https://www.cocoanetics.com/2015/06/proportional-layout-with-swift/
+        for constraint in self.constraints() as! [NSLayoutConstraint] {
+            
+        }
+        */
     }
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
