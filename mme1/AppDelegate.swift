@@ -12,12 +12,38 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    var memes = [Meme]()
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+/*
+        var tempView1 = UIView(frame: CGRectMake(0, 0, 300, 600))
+        var tempView2 = UIView(frame: CGRectMake(0, 0, 300, 600))
+        var tempView3 = UIView(frame: CGRectMake(0, 0, 300, 600))
         
-        application.statusBarHidden = true
+        var tempImgView1 = UIImageView(frame: CGRectMake(0, 0, 300, 600))
+        var tempImg1 = UIImage(named: "meme.jpg")
+        tempImgView1.image = tempImg1
+        
+        var tempImgView2 = UIImageView(frame: CGRectMake(0, 0, 300, 600))
+        var tempImg2 = UIImage(named: "meme2.jpg")
+        tempImgView2.image = tempImg2
+        
+        var tempImgView3 = UIImageView(frame: CGRectMake(0, 0, 300, 600))
+        var tempImg3 = UIImage(named: "meme.jpg")
+        tempImgView3.image = tempImg3
+        
+        tempView1.addSubview(tempImgView1)
+        tempView2.addSubview(tempImgView2)
+        tempView3.addSubview(tempImgView3)
+
+        let meme = Meme(topText: "test", bottomText: "test", image: tempImg1!, imageView: tempImgView1, view: tempView1)
+        let meme2 = Meme(topText: "asdasd", bottomText: "asdas", image: tempImg2!, imageView: tempImgView2, view: tempView2)
+        let meme3 = Meme(topText: "123123", bottomText: "21323", image: tempImg3!, imageView: tempImgView3, view: tempView3)
+        memes.append(meme)
+        memes.append(meme2)
+        memes.append(meme3)
+*/
         
         return true
     }

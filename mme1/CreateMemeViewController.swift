@@ -22,6 +22,9 @@ class CreateMemeViewController: UIViewController, UIImagePickerControllerDelegat
     // textFields delegates objects
     let textFieldDelegate = CustomTextFieldDelegate()
     
+    var meme: Meme?
+    var index: NSInteger?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -64,6 +67,15 @@ class CreateMemeViewController: UIViewController, UIImagePickerControllerDelegat
         
         // Check if device has camera, if not; disable camera button
         cameraButton.enabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
+        
+        UIApplication.sharedApplication().statusBarHidden = true
+        
+        if (meme != nil) {
+            topTextField.text = meme?.topText
+            bottomTextField.text = meme?.bottomText
+            imagePickerView.image = meme?.originalImage
+            shareButton.enabled = true
+        }
     }
     
     
@@ -115,6 +127,7 @@ class CreateMemeViewController: UIViewController, UIImagePickerControllerDelegat
             view: self.view)
         
         if var memedImage = meme.memeImage as UIImage! {
+            
             // Create the activityViewController
             let activityViewController = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
             
@@ -130,10 +143,18 @@ class CreateMemeViewController: UIViewController, UIImagePickerControllerDelegat
                     // If activityType is camera roll
                     if (activityTypeRangeCameraRoll.location != NSNotFound) {
                         // Activity type is camera roll
-                        self.presentDismissableAlertViewControllerWithTitle("Successful!", message: "Your image was successfully saved", preferredStyle: UIAlertControllerStyle.Alert, dismissText: "OK")
+                        self.presentDismissableAlertViewControllerWithTitle("Successful!", message: "Your image was successfully saved", preferredStyle: UIAlertControllerStyle.Alert, dismissText: "OK", completionHandler: { (success) -> Void in
+                            
+                            self.dismissViewControllerAndSaveData(meme)
+                        })
+
                     } else {
                         // Activity type is not camera roll
-                        self.presentDismissableAlertViewControllerWithTitle("Successful!", message: "Your image was successfully shared", preferredStyle: UIAlertControllerStyle.Alert, dismissText: "OK")
+                        self.presentDismissableAlertViewControllerWithTitle("Successful!", message: "Your image was successfully shared", preferredStyle: UIAlertControllerStyle.Alert, dismissText: "OK", completionHandler: { (success) -> Void in
+                            
+                            self.dismissViewControllerAndSaveData(meme)
+                        })
+
                     }
                 }
             }
@@ -141,49 +162,44 @@ class CreateMemeViewController: UIViewController, UIImagePickerControllerDelegat
             presentViewController(activityViewController, animated: true, completion: nil)
             
         } else {
-            presentDismissableAlertViewControllerWithTitle("Issue", message: "Problem when creating the meme image. Please try again", preferredStyle: UIAlertControllerStyle.Alert, dismissText: "OK")
+            presentDismissableAlertViewControllerWithTitle("Issue", message: "Problem when creating the meme image. Please try again", preferredStyle: UIAlertControllerStyle.Alert, dismissText: "OK", completionHandler: { (success) -> Void in
+                self.dismissViewControllerAnimated(true, completion: nil)
+            })
+
+            
+            presentDismissableAlertViewControllerWithTitle("Issue", message: "Problem when creating the meme image. Please try again", preferredStyle: UIAlertControllerStyle.Alert, dismissText: "OK", completionHandler: { (success) -> Void in
+                self.dismissViewControllerAnimated(true, completion: nil)
+            })
         }
     }
     
-    func presentDismissableAlertViewControllerWithTitle(title: String, message: String, preferredStyle: UIAlertControllerStyle, dismissText: String) {
+    func presentDismissableAlertViewControllerWithTitle(title: String, message: String, preferredStyle: UIAlertControllerStyle, dismissText: String, completionHandler: (success: Bool) -> Void) {
         
         // Set the UIAlertController with arguments provided in method arguments
         var alert = UIAlertController(title: title, message: message, preferredStyle: preferredStyle)
         
         // Add dismissaction with text provided in method arguments
-        alert.addAction(UIAlertAction(title: dismissText, style: UIAlertActionStyle.Default, handler: nil))
+        alert.addAction(UIAlertAction(title: dismissText, style: UIAlertActionStyle.Default, handler: { (alert: UIAlertAction!) -> Void in
+            completionHandler(success: true)
+        }))
         
         // Present it
         presentViewController(alert, animated: true, completion: nil)
     }
     
-    
-    /*
-    func rotationDidChange(notification: NSNotification) {
-        // Does not matter which orientation action we're getting. We'll restore textfields original constraints
-        
-        
-        if topTextField.textFieldConstraints != nil{
-            for constraint in topTextField.textFieldConstraints as NSArray as! [NSLayoutConstraint] {
-                topTextField.addConstraint(constraint)
-            }
+    func dismissViewControllerAndSaveData(meme: Meme) {
+        // Save the meme to memes array in appDelegate
+        if index != nil {
+            (UIApplication.sharedApplication().delegate as! AppDelegate).memes.removeAtIndex(index!)
         }
-    }
-    
-    func subscribeToNotifications() {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "rotationDidChange:", name: UIDeviceOrientationDidChangeNotification, object: nil)
-    }
-    
-    func unsubscribeToNotifications() {
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIDeviceOrientationDidChangeNotification, object: nil)
-    }
-    
-    override func viewDidDisappear(animated: Bool) {
-        super.viewDidDisappear(animated)
+        (UIApplication.sharedApplication().delegate as! AppDelegate).memes.append(meme)
         
-        unsubscribeToNotifications()
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
-*/
+
+    @IBAction func dismissViewController(sender: AnyObject) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
 }
 
 
