@@ -110,6 +110,11 @@ class MemeCollectionViewController: UICollectionViewController, UICollectionView
                 editButton.title = "Edit"
                 self.editButton.style = .Plain
                 editModeEnabled = false
+                
+                for cell in collectionView?.visibleCells() as! [MemeCollectionViewCell] {
+                    cell.deleteButton.hidden = true
+                }
+                
             } else {
                 // Put the collection view in edit mode
                 editButton.title = "Done"
@@ -131,6 +136,12 @@ class MemeCollectionViewController: UICollectionViewController, UICollectionView
         if memes.count > 0 {
             editModeEnabled = false
         }
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        editModeEnabled = false
     }
     
     var memes: [Meme] {

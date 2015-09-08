@@ -34,13 +34,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="detailDisclosureButton" indentationWidth="10" reuseIdentifier="MemeTableViewCell" rowHeight="101" id="V9r-Bf-36Z" customClass="MemeTableViewCell" customModule="mme1" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="MemeTableViewCell" rowHeight="101" id="V9r-Bf-36Z" customClass="MemeTableViewCell" customModule="mme1" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="V9r-Bf-36Z" id="2xf-LC-OzC">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cJ1-JI-idz">
                                             <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                            <variation key="widthClass=compact" misplaced="YES">
+                                                <rect key="frame" x="0.0" y="0.0" width="400" height="101"/>
+                                            </variation>
                                         </imageView>
                                         <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lIa-UQ-7Ys">
                                             <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
@@ -49,6 +52,9 @@
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             </view>
                                             <blurEffect style="light"/>
+                                            <variation key="widthClass=compact" misplaced="YES">
+                                                <rect key="frame" x="0.0" y="0.0" width="400" height="101"/>
+                                            </variation>
                                         </visualEffectView>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="krZ-sn-qhz">
                                             <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
@@ -80,7 +86,8 @@
                                                     <exclude reference="JXm-2n-Nuw"/>
                                                 </mask>
                                             </variation>
-                                            <variation key="widthClass=compact">
+                                            <variation key="widthClass=compact" misplaced="YES">
+                                                <rect key="frame" x="108" y="10" width="201" height="41"/>
                                                 <mask key="constraints">
                                                     <include reference="JXm-2n-Nuw"/>
                                                 </mask>
@@ -92,6 +99,9 @@
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                             <size key="shadowOffset" width="0.0" height="0.0"/>
+                                            <variation key="widthClass=compact" misplaced="YES">
+                                                <rect key="frame" x="108" y="51" width="201" height="41"/>
+                                            </variation>
                                         </label>
                                     </subviews>
                                     <constraints>
@@ -696,6 +706,6 @@
         <image name="delete" width="256" height="256"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="zb8-q0-tGj"/>
+        <segue reference="eeW-6z-fKm"/>
     </inferredMetricsTieBreakers>
 </document>
